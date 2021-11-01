@@ -23,7 +23,15 @@ public class OperatorMain03 {
 		
 		// Lazy Evaluation(Short-Circuit Evaluation):
 		// a && b를 계산할 때, a의 결과가 false이면 b를 계산하지 않고 false가 반환됨.
-		// a || b를 계산할 때, a의 결과가 true이면 b를 계산하지 않고 true가 반환됨. 
+		// a || b를 계산할 때, a의 결과가 true이면 b를 계산하지 않고 true가 반환됨.
+		
+		// 삼항 연산자(조건 선택 연산자)
+		// (조건식) ? (값1) : (값2)
+		// 조건식을 만족하는 경우(조건식이 true가 되는 경우)에는 (값1)을 선택
+		// 조건식을 만족하지 못하는 경우(조건식이 false가 되는 경우)에는 (값2)를 선택
+		int total = 49;
+		String result = (total >= 50) ? "합격" : "불합격";
+		System.out.println(result);
 	}
 
 }
