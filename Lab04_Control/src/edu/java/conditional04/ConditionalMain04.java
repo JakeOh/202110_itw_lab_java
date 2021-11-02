@@ -21,6 +21,17 @@ public class ConditionalMain04 {
 			System.out.println("zero");
 		}
 	
-	}
+		// 중첩 if 문: if 블록 또는 else 블록 내부에서 if 구문이 사용되는 것.
+		if (number > 0) {  // number가 0보다 큰 경우
+			System.out.println("양수");
+		} else {  // number가 0보다 크지 않은 경우
+			if (number < 0) {
+				System.out.println("음수");
+			} else {
+				System.out.println("영");
+			}
+		}
+		
+	}  // end of main()
 
 }
