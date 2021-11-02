@@ -23,7 +23,6 @@ public class SwitchMain01 {
 		}
 
 		// 위의 결과와 같은 결과를 만드는 다른 문법:
-		// switch (식)에서 계산된 결과에 따라서 해당 case로 이동 후 break;를 만날 때까지 코드를 실행.
 		switch (number) {
 		case 1:
 			System.out.println("One");
@@ -41,6 +40,7 @@ public class SwitchMain01 {
 			System.out.println("I don't know~");
 		}  // end switch
 		
+		// switch (식)에서 계산된 결과에 따라서 해당 case로 이동 후 break;를 만날 때까지 코드를 실행.
 		// 위의 결과와 비교!!
 		switch (number) {
 		case 1:
