@@ -40,6 +40,28 @@ public class LoopMain06 {
 			end++;  // end의 값을 1 증가시킴
 		}
 		
+		System.out.println("-----");
+		// 1 + 2 + 3 + ... + n >= 100를 만족하는 가장 작은 n은 얼마일까요?
+		int sum = 0;  // 1부터 n까지의 합을 저장할 변수를 선언, 초기화
+		for (int n = 1; ; n++) {  // 1부터 1씩 증가시키면서 무한 반복
+			sum += n;
+			System.out.println("n = " + n + ", sum = " + sum);
+			if (sum >= 100) {  // 1부터 더한 값이 100 이상이 되면
+				System.out.println("n = " + n);
+				break;  // 무한 반복문을 종료
+			}
+		}
+		
+		System.out.println("-----");
+		// break를 사용하지 않는 방법
+		sum = 0;  // 1부터 n까지 합을 저장할 변수를 초기화
+		int n = 1;  // 반복을 시작할 값. for 구문이 끝난 다음에 바뀐 n의 값을 확인하기 위해서
+		for ( ; sum < 100; n++) {
+			sum += n;
+			System.out.println("n = " + n + ", sum = " + sum);
+		}
+		System.out.println("n = " + n);
+		
 	}  // end main
 
 }
