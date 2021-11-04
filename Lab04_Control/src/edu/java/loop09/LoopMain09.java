@@ -45,6 +45,16 @@ public class LoopMain09 {
 		}
 		System.out.println();
 		
+		System.out.println("-----");
+		// 알파벳 소문자 a부터 z까지 한 줄에 출력
+		char ch = 'a';  // char: 문자을 저장하는 타입. 정수 타입의 특별한 경우(사칙연산과 크기 비교 가능).
+		while (ch <= 'z') {
+			System.out.print(ch + " ");
+			ch++;
+		}
+		System.out.println();
+//		System.out.println(ch);
+		
 	}  // end main
 
 }
