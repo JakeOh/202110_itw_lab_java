@@ -12,7 +12,7 @@ public class ArrayMain04 {
 				{1, 2, 3, 4},
 				{10, 20, 30, 40},
 				{11, 21, 31, 41} 
-				};
+		};
 		System.out.println(array);  // [[I: 정수들의 2차원 배열
 		System.out.println(array[0]);  // [I: 정수들의 1차원 배열
 		System.out.println(array[0][0]);  // 1
