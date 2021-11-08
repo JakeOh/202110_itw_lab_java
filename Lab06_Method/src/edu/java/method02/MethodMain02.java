@@ -10,6 +10,16 @@ public class MethodMain02 {
 		double result = add(1.1, 2.2);  // add 메서드 호출. argument(1.1, 2.2)를 전달.
 		System.out.println(result);
 
+		// subtract, multiply, divide 메서드를 호출, 테스트
+		result = subtract(1.1, 2.2);
+		System.out.println(result);
+		
+		result = multiply(1.1, 2.2);
+		System.out.println(result);
+		
+//		result = divide(1.1, 2.2);
+		System.out.println(divide(1.1, 2.2));
+		
 	}  // end main()
 
 	/**
@@ -32,7 +42,9 @@ public class MethodMain02 {
 	 *  @param y double
 	 *  @return x - y
 	 */
-	
+	public static double subtract(double x, double y) {
+		return x - y;
+	}
 	
 	/**
 	 * multiply
@@ -42,7 +54,9 @@ public class MethodMain02 {
 	 * @param y double
 	 * @return x * y
 	 */
-	
+	public static double multiply(double x, double y) {
+		return x * y;
+	}
 	
 	/**
 	 * divide
@@ -52,5 +66,8 @@ public class MethodMain02 {
 	 * @param y double
 	 * @return x / y
 	 */
+	public static double divide(double x, double y) {
+		return x / y;
+	}
 	
 }  // end class
