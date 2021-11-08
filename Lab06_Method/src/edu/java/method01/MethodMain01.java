@@ -24,6 +24,9 @@ public class MethodMain01 {
 		newLines(3);  // newLines() 메서드를 호출하면서 argument(값) 2를 메서드에게 전달.
 		System.out.println("3.");
 		
+		// Alt+left-arrow(<-): 이전 커서 위치로 이동
+		// Alt+right-arrow(->): 다음 커서 위치로 이동
+		
 	} // end main() method
 
 	// newLine() 메서드 선언(정의)
