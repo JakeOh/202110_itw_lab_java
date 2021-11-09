@@ -7,8 +7,56 @@ package edu.java.class01;
 public class BasicTv {
 
 	// 데이터(객체의 상태를 저장하기 위한 변수) - field, instance variable(인스턴스 변수)
+	// filed가 지역 변수와 다른 점: 클래스 내부의 모든 메서드가 사용할 수 있는 변수.
 	boolean powerOn;  // TV의 현재 전원 상태를 저장하기 위한 필드(true: ON, false: OFF)
 	int volume; // TV의 현재 음량 상태를 저장하기 위한 필드
 	int channel;  // TV의 현재 채널 번호를 저장하기 위한 필드
 
-}
+	// 기능(객체의 동작) - method
+	/**
+	 * 필드 volume의 값을 1 증가시키고, 증간된 음량을 화면에 출력.
+	 */
+	public void volumeUp() {
+		volume++;  // (지역 변수가 아니라) 필드의 값을 변경.
+		System.out.println("volume: " + volume);  // 변경된 내용 출력.
+	}
+	
+	/**
+	 * 필드 volume의 값을 1 감소시키고, 변경된 내용을 출력
+	 */
+	public void volumeDown() {
+		volume--;
+		System.out.println("volume: " + volume);
+	}
+	
+	/**
+	 * 필드 channel의 값을 1 증가시키고, 변경된 내용을 출력 
+	 */
+	public void channelUp() {
+		channel++;
+		System.out.println("channel: " + channel);
+	}
+	
+	/**
+	 * 필드 channel의 값을 1 감소시키고, 변경된 내용을 출력
+	 */
+	public void channelDown() {
+		channel--;
+		System.out.println("channel: " + channel);
+	}
+	
+	/**
+	 * TV가 켜져 있는 상태이면 끄고, TV가 꺼져 있는 상태이면 킴.
+	 * powerOn의 값이 true이면 false로 변경, powerOn의 값이 false이면 true로 변경.
+	 */
+	public void powerOnOff() {
+		if (powerOn) {  // powerOn의 값이 true이면(TV가 켜져 있으면)
+			powerOn = false;
+			System.out.println("TV OFF");
+		} else {  // powerOn의 값이 falase이면(TV가 꺼져 있으면)
+			powerOn = true;
+			System.out.println("TV ON");
+		}
+	}
+	
+}  // end class BasicTv
