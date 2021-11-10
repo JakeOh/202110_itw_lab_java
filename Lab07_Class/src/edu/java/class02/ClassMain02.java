@@ -24,6 +24,10 @@ public class ClassMain02 {
 		System.out.println(stu2.id);
 		System.out.println(stu2.name);
 		
+		Student stu3 = new Student(301);
+		System.out.println(stu3.id);
+		System.out.println(stu3.name);
+		
 	}  // end main()
 
 }  // end ClassMain02
