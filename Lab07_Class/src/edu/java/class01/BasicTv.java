@@ -4,12 +4,17 @@ package edu.java.class01;
 // 클래스(class): 프로그램에서 필요한 데이터(field)와 기능(method)을 묶어서 하나의 "데이터 타입"을 정의한 것.
 // 데이터 타입 -> 변수 선언, 파마미터 선언, 리턴 타입 선언
 
+// 클래스 선언: [수식어] class 클래스이름 { ... }
+// 클래스 이름 작성 방법:
+// - 영문자, 숫자, _, $를 사용할 수 있음.
+// - 숫자로 시작할 수 없음.
+// - camel 표기법 권장. 변수와는 다르게 첫글자부터 대문자로 하는 것을 권장.
 public class BasicTv {
 
 	// 데이터(객체의 상태를 저장하기 위한 변수) - field, instance variable(인스턴스 변수)
 	// filed가 지역 변수와 다른 점: 클래스 내부의 모든 메서드가 사용할 수 있는 변수.
 	boolean powerOn;  // TV의 현재 전원 상태를 저장하기 위한 필드(true: ON, false: OFF)
-	int volume; // TV의 현재 음량 상태를 저장하기 위한 필드
+	int volume;  // TV의 현재 음량 상태를 저장하기 위한 필드
 	int channel;  // TV의 현재 채널 번호를 저장하기 위한 필드
 
 	// 기능(객체의 동작) - method
@@ -51,12 +56,19 @@ public class BasicTv {
 	 */
 	public void powerOnOff() {
 		if (powerOn) {  // powerOn의 값이 true이면(TV가 켜져 있으면)
-			powerOn = false;
+			powerOn = false;  // TV를 끔.
 			System.out.println("TV OFF");
 		} else {  // powerOn의 값이 falase이면(TV가 꺼져 있으면)
-			powerOn = true;
+			powerOn = true;  // TV를 킴.
 			System.out.println("TV ON");
 		}
+	}
+	
+	public void info() {
+		System.out.println("--- TV 정보 ---");
+		System.out.println("powerOn: " + powerOn);
+		System.out.println("volume: " + volume);
+		System.out.println("channel: " + channel);
 	}
 	
 }  // end class BasicTv
