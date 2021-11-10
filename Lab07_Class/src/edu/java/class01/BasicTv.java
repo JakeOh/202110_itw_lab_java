@@ -58,7 +58,7 @@ public class BasicTv {
 		if (powerOn) { // powerOn의 값이 true이면(TV가 켜져 있으면)
 			powerOn = false; // TV를 끔.
 			System.out.println("TV OFF");
-		} else { // powerOn의 값이 falase이면(TV가 꺼져 있으면)
+		} else { // powerOn의 값이 false이면(TV가 꺼져 있으면)
 			powerOn = true; // TV를 킴.
 			System.out.println("TV ON");
 		}
