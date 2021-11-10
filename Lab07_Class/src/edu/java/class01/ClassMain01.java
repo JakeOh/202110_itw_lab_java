@@ -46,6 +46,7 @@ public class ClassMain01 {
 		
 		// 두번째 BasicTv 인스턴스 생성
 		BasicTv tv2 = new BasicTv();
+		System.out.println(tv2);
 		tv2.info();
 		
 	}  // end main()
