@@ -1,6 +1,7 @@
 package edu.java.class04;
 
 // 2차원 평면 상의 점의 좌표를 표현하는 클래스
+// class: field + method + constructor => data type
 public class Point {
 	// 필드(멤버 변수)
 	double x;  // 점의 x 좌표
@@ -13,13 +14,13 @@ public class Point {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	// 메서드
 	/**
 	 * 점의 좌표를 출력하는 메서드.
 	 */
 	public void info() {
-		System.out.println("Point(x=" + x + ", y=" + y + ")");
+		System.out.println("Point(x=" + this.x + ", y=" + this.y + ")");
 	}
 	
 	/**
@@ -31,8 +32,8 @@ public class Point {
 	 * @return Point (return this;)
 	 */
 	public Point move(double dx, double dy) {
-		x += dx;  // x = x + dx;
-		y += dy;
+		this.x += dx;  // this.x = this.x + dx;
+		this.y += dy;  // this.y = this.y + dy;
 		return this;  // 인스턴스의 주소(참조) 값을 리턴.
 	}
 	
