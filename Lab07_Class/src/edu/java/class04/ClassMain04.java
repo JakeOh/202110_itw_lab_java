@@ -20,11 +20,13 @@ public class ClassMain04 {
 		// result가 Point 타입이기 때문에 Point 클래스의 메서드를 사용할 수 있다.
 		result.move(0, 2);  // (2)
 		result.info();
-		pt2.info();
+		pt2.info();  
+		// pt2와 result가 같은 인스턴스를 가리키기 때문에,
+		// result를 move한 것은 pt2를 move한 것과 같다.
 		
 		// 위의 (1)과 (2)를 나눠서 호출하는 코드를 아래와 같은 메서드 연쇄 호출로 할 수 있다.
 		// pt2.move(2, 1).move(0,2);
 
-	}
+	}  // end main()
 
 }
