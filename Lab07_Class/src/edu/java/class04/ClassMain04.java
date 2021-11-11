@@ -45,6 +45,12 @@ public class ClassMain04 {
 		System.out.println();
 		Circle c3 = new Circle(0, 0, 1);
 		c3.info();
+		System.out.println("c3 넓이 = " + c3.area());
+		System.out.println("c3 둘레 = " + c3.perimeter());
+		
+		// c3 Circle을 -1, -1로 이동
+		c3.move(-1, -1);
+		c3.info();
 		
 	}  // end main()
 

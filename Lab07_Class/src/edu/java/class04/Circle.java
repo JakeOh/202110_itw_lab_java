@@ -30,4 +30,19 @@ public class Circle {
 		System.out.println("Circle(중심 x=" + this.center.x + ", 중심 y=" + this.center.y + ", 반지름=" + this.radius +")");
 	}
 	
+	public double area() {
+		return Math.PI * this.radius * this.radius;
+	}
+	
+	public double perimeter() {
+		return 2 * Math.PI * this.radius;
+	}
+	
+	public Circle move(double dx, double dy) {
+//		this.center.x += dx;
+//		this.center.y += dy;
+		this.center.move(dx, dy);
+		return this;
+	}
+	
 }  // end class Circle
