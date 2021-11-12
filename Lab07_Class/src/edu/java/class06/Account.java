@@ -23,11 +23,15 @@ public class Account {
 	}
 	
 	/**
-	 * 입금(depoit) - 잔액 balance를 금액 amount만큼 증가시킴.
+	 * 입금(deposit) - 잔액 balance를 금액 amount만큼 증가시킴.
 	 * 
 	 * @param amount - double. 입금할 금액.
 	 * @return 입금 후 잔액을 리턴.
 	 */
+	public double deposit(double amount) {
+		this.balance += amount;  // balance = balance + amount;
+		return this.balance;
+	}
 
 	/**
 	 * 출금(withdraw) - 잔액 balance를 금액 amount만큼 감소시킴.
@@ -35,6 +39,10 @@ public class Account {
 	 * @param amount - double. 출금할 금액.
 	 * @return 출금 후 잔액을 리턴.
 	 */
+	public double withdraw(double amount) {
+		this.balance -= amount;
+		return balance;
+	}
 	
 	/**
 	 * 이체(transfer) - amount 금액을 to 계좌로 이체.
@@ -43,5 +51,14 @@ public class Account {
 	 * @param to - Account. 이체할 계좌.
 	 * @return true(이체 성공) 리턴.
 	 */
+	public boolean transfer(double amount, Account to) {
+		// 이체: (1) 내 계좌에서 출금. (2) 상대방 계좌에 입금.
+//		this.balance -= amount;  // 출금
+//		to.balance += amount;  // 입금
+		this.withdraw(amount);
+		to.deposit(amount);
+		
+		return true;
+	}
 
 }
