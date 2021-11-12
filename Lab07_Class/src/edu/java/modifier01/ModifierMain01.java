@@ -15,7 +15,13 @@ package edu.java.modifier01;
 public class ModifierMain01 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// AccessTest 클래스의 인스턴스 생성
+		AccessTest test = new AccessTest();
+		// 참조 변수 test 다음에 참조 연산자(.)를 사용했을 때 Eclipse가 보여주는 것들:
+		// packageField, protectedField, publicField, public method
+		
+		test.printAllFields();
+//		System.out.println(test.privateField);  // not visible 에러 발생
 
 	}
 
