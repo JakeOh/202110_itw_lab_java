@@ -11,6 +11,7 @@ package edu.java.modifier01;
 //    (2) (package): 같은 패키지에 있는 클래스들에서 직접 접근(사용)이 가능. 수식어를 사용하지 않는 경우.
 //    (3) protected: 같은 패키지에 있거나, 상속을 받는 클래스 안에서 직접 접근(사용)이 가능.
 //    (4) public: 어디서든지 직접 접근(사용)이 가능.
+// 가시성(visibility) 범위: private < (package) < protected < public
 
 public class ModifierMain01 {
 
