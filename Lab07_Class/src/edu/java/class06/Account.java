@@ -9,8 +9,19 @@ public class Account {
 	double balance; // 잔액
 	
 	// 파라미터가 2개인 생성자
+	public Account(int accountNo, double balance) {
+		this.accountNo = accountNo;
+		this.balance = balance;
+	}
 	
 	// 메서드
+	public void info() {
+		System.out.println("----- 계좌 정보 -----");
+		System.out.println("계좌번호: " + accountNo);
+		System.out.println("잔액: " + balance);
+		System.out.println("---------------------");
+	}
+	
 	/**
 	 * 입금(depoit) - 잔액 balance를 금액 amount만큼 증가시킴.
 	 * 
