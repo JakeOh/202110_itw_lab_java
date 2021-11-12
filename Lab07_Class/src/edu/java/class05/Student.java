@@ -7,8 +7,7 @@ public class Student {
 	Score score; // 학생이 수강 신청한 과목의 점수들을 저장하는 객체
 
 	// 생성자 - default, 파라미터 3개
-	public Student() {
-	}
+	public Student() {}
 
 	public Student(int id, String name, Score score) {
 		this.id = id;

@@ -10,6 +10,8 @@ package edu.java.class01;
 // - 숫자로 시작할 수 없음.
 // - camel 표기법 권장. 변수와는 다르게 첫글자부터 대문자로 하는 것을 권장.
 public class BasicTv {
+	public static final int MAX = 3; // 채널, 음량의 최댓값
+	public static final int MIN = 0; // 채널, 음량의 최솟값
 
 	// 데이터(객체의 상태를 저장하기 위한 변수) - field, instance variable(인스턴스 변수)
 	// filed가 지역 변수와 다른 점: 클래스 내부의 모든 메서드가 사용할 수 있는 변수.
@@ -22,32 +24,52 @@ public class BasicTv {
 	 * 필드 volume의 값을 1 증가시키고, 증간된 음량을 화면에 출력.
 	 */
 	public void volumeUp() {
-		volume++; // (지역 변수가 아니라) 필드의 값을 변경.
-		System.out.println("volume: " + volume); // 변경된 내용 출력.
+		if (powerOn) { // TV가 켜져 있으면
+			if (volume < MAX) { // 현재 음량이 음량의 최댓값보다 작으면
+				volume++; // (지역 변수가 아니라) 필드의 값을 변경.
+			}
+			System.out.println("volume: " + volume); // 변경된 내용 출력.
+		}
 	}
 
 	/**
 	 * 필드 volume의 값을 1 감소시키고, 변경된 내용을 출력
 	 */
 	public void volumeDown() {
-		volume--;
-		System.out.println("volume: " + volume);
+		if (powerOn) { // TV가 켜져 있으면
+			if (volume > MIN) { // 현재 음량이 음량의 최솟값보다 크면
+				volume--; // 음량을 1 줄임
+			}
+			System.out.println("volume: " + volume); // 현재 음량을 출력
+		}
 	}
 
 	/**
 	 * 필드 channel의 값을 1 증가시키고, 변경된 내용을 출력
 	 */
 	public void channelUp() {
-		channel++;
-		System.out.println("channel: " + channel);
+		if (powerOn) { // TV가 켜져 있는 경우에
+			if (channel < MAX) { // 현재 채널이 채널의 최댓값보다 작으면
+				channel++; // 채널을 1 증가
+			} else { // 채널 최댓값에 도달한 경우에는
+				channel = MIN; // 채널을 최솟값으로 순환시킴.
+			}
+			System.out.println("channel: " + channel);
+		}
 	}
 
 	/**
 	 * 필드 channel의 값을 1 감소시키고, 변경된 내용을 출력
 	 */
 	public void channelDown() {
-		channel--;
-		System.out.println("channel: " + channel);
+		if (powerOn) { // TV가 켜져 있을 때
+			if (channel > MIN) { // 현재 채널이 채널의 최솟값보다 크면
+				channel--; // 채널을 1 감소
+			} else { // 채널 최솟값이면
+				channel = MAX; // 채널을 최댓값으로 순환시킴.
+			}
+			System.out.println("channel: " + channel);
+		}
 	}
 
 	/**
