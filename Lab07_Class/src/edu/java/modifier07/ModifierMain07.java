@@ -27,7 +27,11 @@ public class ModifierMain07 {
 		// test1() 메서드를 사용하기 위해서는 인스턴스를 먼저 생성한 후 참조 변수를 통해서 사용함.
 		ModifierMain07 inst = new ModifierMain07();
 		inst.test1();
-	}
+		
+		System.out.println();  // System 클래스의 static 변수 out의 인스턴스 메서드 println()을 호출
+		MySystem.out.print();
+		
+	}  // end main()
 	
 	public void test1() {
 		System.out.println("메인 인스턴스 메서드");
