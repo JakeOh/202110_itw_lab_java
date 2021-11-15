@@ -12,5 +12,20 @@ package edu.java.modifier07;
 
 
 public class StaticTest {
+	int instanceVariable;  // 인스턴스 필드(멤버 변수)
+	static int staticVariable;  // static 필드(멤버 변수)
+	
+	public void printVariables() {
+		System.out.println("--- 인스턴스 메서드 ---");
+		System.out.println("instanceVariable = " + instanceVariable);
+		System.out.println("staticVariable = " + staticVariable);
+	}
+	
+	public static void printVariables2() {
+		System.out.println("--- static 메서드 ---");
+//		System.out.println("instace variable = " + instanceVariable);
+		// static 메서드는 static이 아닌(non-static) 멤버 변수를 참조할 수 없다!!
+		System.out.println("staticVariable = " + staticVariable);
+	}
 	
 }
