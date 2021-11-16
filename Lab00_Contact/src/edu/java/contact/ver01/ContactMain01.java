@@ -5,7 +5,7 @@ import java.util.Scanner;
 import edu.java.contact.model.Contact;
 
 public class ContactMain01 {
-	private static final int MAX_LENGTH = 5;  // 상수 선언
+	private static final int MAX_LENGTH = 100;  // 상수 선언
 	
 	private static Scanner scanner = new Scanner(System.in);
 	private static Contact[] contacts = new Contact[MAX_LENGTH];
@@ -32,10 +32,11 @@ public class ContactMain01 {
 			case 2: // 인덱스 검색 - 검색하고자 하는 인덱스의 연락처 1개만 출력
 				selectContactByIndex();
 				break;
-			case 3: // 연락처 추가
+			case 3: // 새 연락처 추가
 				insertConctact();
 				break;
 			case 4: // 연락처 업데이트
+				updateContact();
 				break;
 			default:
 				System.out.println("메뉴를 다시 선택하세요...");
@@ -44,6 +45,35 @@ public class ContactMain01 {
 
 		System.out.println("*** 프로그램 종료***");
 	} // end main()
+
+	private static void updateContact() {
+		System.out.println();
+		System.out.println("----- 연락처 업데이트 -----");
+		System.out.println("수정할 인덱스>>>");
+		int index = scanner.nextInt();
+		scanner.nextLine();  // "enter"를 버퍼에서 삭제.
+		
+		if (index < 0 || index >= count) {
+			System.out.println("수정할 연락처 정보가 없습니다.");
+			return;  // 메서드 종료
+		}
+		
+		System.out.println(contacts[index]); // 업데이트 전 연락처 정보 출력
+		
+		System.out.println("수정할 이름>>>");
+		String name = scanner.nextLine();
+		System.out.println("수정할 전화번호>>>");
+		String phone = scanner.nextLine();
+		System.out.println("수정할 이메일>>>");
+		String email = scanner.nextLine();
+		
+		// Contact 클래스의 setter 메서드를 사용해서 각 필드를 업데이트
+		contacts[index].setName(name);
+		contacts[index].setPhone(phone);
+		contacts[index].setEmail(email);
+
+		System.out.println("----- 연락처 업데이트 성공 -----");
+	} // end updateContact()
 
 	private static void selectContactByIndex() {
 		System.out.println();
