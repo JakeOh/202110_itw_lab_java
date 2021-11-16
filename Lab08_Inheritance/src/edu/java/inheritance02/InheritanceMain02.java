@@ -21,6 +21,12 @@ public class InheritanceMain02 {
 		// 하위 클래스의 BusinessPerson() 생성자가 호출됨.
 		System.out.println("이름: " + p3.getName());
 		System.out.println("회사: " + p3.getCompany());
-	}
+		
+		System.out.println();
+		
+		// BusinessPerson 클래스의 파라미터를 갖는 생성자를 호출
+		BusinessPerson p4 = new BusinessPerson("오쌤", "아이티윌");
+		
+	}  // end main()
 
 }
