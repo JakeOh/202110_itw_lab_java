@@ -30,7 +30,10 @@ public class InheritanceMain06 {
 		System.out.println(pt1.hashCode());
 		System.out.println(pt2.hashCode());
 		
+		System.out.println();
+		
 		Point pt3 = new Point(1.0, 0.0);
+		System.out.println(pt3);
 		System.out.println(pt1.equals(pt3)); // -> false
 		System.out.println(pt3.hashCode());
 
