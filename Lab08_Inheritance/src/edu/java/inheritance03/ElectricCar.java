@@ -25,4 +25,11 @@ public class ElectricCar extends Car {
 		System.out.println("배터리 충전량=" + charge);
 	}
 	
+	public int getCharge() {
+		return charge;
+	}
+	
+	public void setCharge(int charge) {
+		this.charge = charge;
+	}
 }
