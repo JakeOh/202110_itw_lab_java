@@ -10,8 +10,8 @@ public abstract class Shape {
 	}
 	
 	// abstract method
-	public abstract double area();
-	public abstract double perimeter();
+	public abstract double area();  // 넓이
+	public abstract double perimeter();  // 둘레길이
 	
 	// final method
 	public final void draw() {
