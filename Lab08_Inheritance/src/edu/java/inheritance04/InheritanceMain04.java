@@ -19,6 +19,8 @@ public class InheritanceMain04 {
 
 	}
 
+	// 메서드의 파라미터 타입을 super 타입으로 선언하면,
+	// 메서드를 사용할 때 전달하는 argument는 super 타입 객체도 가능하고, 상속받는 sub 객체도 가능함.
 	private static void printArray(Object[] array) {
 		System.out.print("[ ");
 		for (Object s : array) {
