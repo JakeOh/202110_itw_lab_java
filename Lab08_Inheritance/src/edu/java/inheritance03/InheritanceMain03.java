@@ -32,6 +32,20 @@ public class InheritanceMain03 {
 		// upcasting: Sub class 타입의 객체를 생성하고 Super class 타입의 변수에 저장하는 것.
 		// downcasting: Super 타입으로 선언된 변수를 Sub 타입으로 "명시적"으로 타입 변환하는 것.
 		// line 23 - upcasting, line 30 - downcasting
+		
+		System.out.println();
+		
+		// 다형성을 사용한 배열 생성
+		// 배열을 부모(super) 타입으로 선언하면, 부모 타입뿐 만 아니라 자식(sub) 타입의 객체도 저장할 수 있음.
+		Car[] cars = new Car[3];
+		cars[0] = new Car(0);
+		cars[1] = new ElectricCar(0, 0);
+		cars[2] = new ElectricCar(50, 100);
+		for (Car c : cars) {
+			c.drive();
+			System.out.println("-----");
+		}
+		
 	}
 
 }
