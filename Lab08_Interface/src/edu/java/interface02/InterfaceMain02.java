@@ -22,8 +22,8 @@ public class InterfaceMain02 {
 		
 		// public abstract 메서드, public default 메서드 -> 인터페이스 구현 클래스의 인스턴스를 생성한 후 사용 가능.
 		Test t = new TestImpl();
-		t.test1();
-		t.test2();
+		t.test1();  // 추상 메서드를 override해서 구현한 코드가 실행됨.
+		t.test2();  // default 구현 코드가 실행됨.
 
 	}
 
