@@ -12,6 +12,7 @@ public class Rectangle extends Shape {
 		this.height = height;
 	}
 
+	// 상위 클래스 Shape이 가지고 있는 추상 메서드들을 override해서 구현(implement).
 	@Override
 	public double area() {
 		return width * height;
