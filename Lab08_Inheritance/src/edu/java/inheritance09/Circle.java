@@ -6,8 +6,18 @@ public class Circle extends Shape {
 	
 	// constructor
 	public Circle(double radius) {
-		// TODO
+		super("동그라미");
+		this.radius = radius;
+	}
+	
+	@Override
+	public double area() {
+		return Math.PI * radius * radius;
 	}
 
-	// TODO: 구현
+	@Override
+	public double perimeter() {
+		return 2 * Math.PI * radius;
+	}
+
 }
