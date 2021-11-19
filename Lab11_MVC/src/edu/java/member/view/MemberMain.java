@@ -22,13 +22,9 @@ import java.util.Scanner;
 public class MemberMain {
 	// field(member variable)
 	private static Scanner scanner = new Scanner(System.in);
+	private static MemberDao dao = MemberDaoImpl.getInstance();  // 다형성(polymorphism)
 
 	public static void main(String[] args) {
-		MemberDao dao1 = MemberDaoImpl.getInstance();
-		MemberDao dao2 = MemberDaoImpl.getInstance();
-		System.out.println(dao1);
-		System.out.println(dao2);
-		
 		// 회원 관리 프로그램 메인(View)
 		System.out.println("*** 회원 관리 프로그램 ***");
 		
@@ -64,38 +60,65 @@ public class MemberMain {
 	private static void updateMemberInfo() {
 		System.out.println();
 		System.out.println("----- 회원 정보 수정 화면 -----");
-		// TODO:
-		// 변경할 인덱스 입력, 변경할 패스워드 입력
-		// result = dao.update(index, password);
+		System.out.println("변경할 인덱스 입력>>");
+		String s = scanner.nextLine();
+		int index = Integer.parseInt(s);
+		System.out.println("변경할 패스워드 입력>>");
+		String pwd = scanner.nextLine();
+		
+		// Controller 클래스의 기능(메서드)를 사용해서 회원 정보 업데이트 수행
+		int result = dao.update(index, pwd);
 		// 업데이트 결과 출력
+		if (result == 1) {
+			System.out.println("회원 정보 업데이트 성공!!!");
+		} else {
+			System.out.println("회원 정보 업데이트 실패...");
+		}
 	}
 
 	private static void selectMemberByIndex() {
 		System.out.println();
 		System.out.println("----- 인덱스 검색 화면 -----");
-		// TODO:
-		// 인덱스 입력>>
-		// Member = dao.select(index)
-		// Member 출력
+		System.out.println("검색할 인덱스 입력>>");
+		int index = Integer.parseInt(scanner.nextLine());
+
+		// Controller의 기능(메서드)를 사용해서 해당 인덱스의 회원 정보를 검색
+		Member member = dao.select(index);
+		// 검색 결과 출력
+		System.out.println(member);
 	}
 
 	private static void selectAllMembers() {
 		System.out.println();
 		System.out.println("----- 전체 회원 목록 -----");
-		// TODO:
-		// Member[] = dao.select();
-		// for (Member m : 배열) {출력}
+		
+		// Controller의 기능(메서드)를 사용해서 회원 전체 목록 검색
+		Member[] list = dao.select();
+		
+		// 검색 결과를 출력
+		for (Member m : list) {
+			System.out.println(m);
+		}
+		System.out.println("--------------------------");
 	}
 
 	private static void insertNewMember() {
 		System.out.println();
 		System.out.println("----- 회원 가입 화면 -----");
-		// TODO:
-		// ID 입력
-		// PW 입력
-		// Member 객체 생성
-		// result = dao.insert(member);
+		System.out.println("ID 입력>>");
+		String id = scanner.nextLine();
+		System.out.println("Password 입력>>");
+		String pwd = scanner.nextLine();
+		Member member = new Member(id, pwd);
+		
+		// Controller 기능(메서드)를 사용해서 회원 가입 수행 
+		int result = dao.insert(member);
 		// 회원 가입 결과 출력
+		if (result == 1) {
+			System.out.println("회원 가입 성공!!!");
+		} else {
+			System.out.println("회원 가입 실패...");
+		}
 	}
 
 	private static int chooseMenu() {
