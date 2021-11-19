@@ -1,5 +1,7 @@
 package edu.java.member.view;
 
+import edu.java.member.controller.MemberDao;
+import edu.java.member.controller.MemberDaoImpl;
 import edu.java.member.model.Member;
 
 // 클래스나 인터페이스에서 선언된 public static 멤버 변수 이름을 import하는 방법:
@@ -22,6 +24,11 @@ public class MemberMain {
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		MemberDao dao1 = MemberDaoImpl.getInstance();
+		MemberDao dao2 = MemberDaoImpl.getInstance();
+		System.out.println(dao1);
+		System.out.println(dao2);
+		
 		// 회원 관리 프로그램 메인(View)
 		System.out.println("*** 회원 관리 프로그램 ***");
 		
@@ -37,13 +44,13 @@ public class MemberMain {
 				selectAllMembers();
 				break;
 			case SELECT_BY_INDEX:
-				// TODO:
+				selectMemberByIndex();
 				break;
 			case INSERT:
 				insertNewMember();
 				break;
 			case UPDATE:
-				// TODO:
+				updateMemberInfo();
 				break;
 			default:
 				System.out.println("메뉴를 다시 선택하세요...");
@@ -53,6 +60,24 @@ public class MemberMain {
 
 		System.out.println("*** 회원 관리 프로그램 종료 ***");
 	} // end main()
+
+	private static void updateMemberInfo() {
+		System.out.println();
+		System.out.println("----- 회원 정보 수정 화면 -----");
+		// TODO:
+		// 변경할 인덱스 입력, 변경할 패스워드 입력
+		// result = dao.update(index, password);
+		// 업데이트 결과 출력
+	}
+
+	private static void selectMemberByIndex() {
+		System.out.println();
+		System.out.println("----- 인덱스 검색 화면 -----");
+		// TODO:
+		// 인덱스 입력>>
+		// Member = dao.select(index)
+		// Member 출력
+	}
 
 	private static void selectAllMembers() {
 		System.out.println();
