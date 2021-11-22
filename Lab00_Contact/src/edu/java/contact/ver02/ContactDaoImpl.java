@@ -38,8 +38,12 @@ public class ContactDaoImpl implements ContactDao {
 
 	@Override
 	public Contact select(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		Contact result = null;
+		if (index >= 0 && index < MAX_LENGTH) {
+			result = contacts[index];
+		}
+		
+		return result;
 	}
 
 	@Override

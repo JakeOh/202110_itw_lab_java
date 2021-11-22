@@ -26,8 +26,14 @@ public class ContactMain02 {
 			case SELECT_ALL:
 				selectAllContacts();
 				break;
+			case SELECT_BY_INDEX:
+				selectContactByIndex();
+				break;
 			case INSERT:
 				insertNewContact();
+				break;
+			case UPDATE:
+				updateContactInfo();
 				break;
 			default:
 				System.out.println("다시 선택하세요...");
@@ -37,6 +43,40 @@ public class ContactMain02 {
 
 		System.out.println("*** 프로그램 종료 ***");
 	} // end main()
+
+	private static void updateContactInfo() {
+		System.out.println();
+		System.out.println("--- 연락처 정보 수정 ---");
+		System.out.println("수정할 인덱스>>");
+		String s = scanner.nextLine();
+		int index = Integer.parseInt(s);
+		System.out.println("이름 수정>>");
+		String name = scanner.nextLine();
+		System.out.println("전화번호 수정>>");
+		String phone = scanner.nextLine();
+		System.out.println("이메일 수정>>");
+		String email = scanner.nextLine();
+		
+		// Controller의 메서드를 사용
+		// 결과 출력
+	}
+
+	private static void selectContactByIndex() {
+		System.out.println();
+		System.out.println("--- 인덱스 검색 ---");
+		System.out.println("검색할 인덱스>>");
+		String s = scanner.nextLine();
+		int index = Integer.parseInt(s);
+		
+		// Controller의 메서드를 사용
+		Contact contact = dao.select(index);
+		// 결과 출력
+		if (contact != null) {
+			System.out.println(contact);
+		} else {
+			System.out.println("입력한 인덱스에는 연락처 정보가 없습니다.");
+		}
+	}
 
 	private static void insertNewContact() {
 		System.out.println();
