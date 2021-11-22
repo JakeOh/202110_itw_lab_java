@@ -60,8 +60,16 @@ public class ContactDaoImpl implements ContactDao {
 
 	@Override
 	public int update(int index, Contact contact) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		if (index >= 0 && index < count) {
+//			contacts[index] = contact;
+			contacts[index].setName(contact.getName());
+			contacts[index].setPhone(contact.getPhone());
+			contacts[index].setEmail(contact.getEmail());
+			result = 1;
+		}
+		
+		return result;
 	}
 
 }

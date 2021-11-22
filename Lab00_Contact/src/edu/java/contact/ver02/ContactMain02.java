@@ -58,7 +58,14 @@ public class ContactMain02 {
 		String email = scanner.nextLine();
 		
 		// Controller의 메서드를 사용
+		Contact contact = new Contact(name, phone, email);
+		int result = dao.update(index, contact);
 		// 결과 출력
+		if (result == 1) {
+			System.out.println("연락처 정보 수정 성공!!!");
+		} else {
+			System.out.println("연락처 정보 수정 실패...");
+		}
 	}
 
 	private static void selectContactByIndex() {
