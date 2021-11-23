@@ -61,9 +61,25 @@ public class ListMain01 {
 		list.remove(2);  // 인덱스 2 위치의 원소를 삭제
 		System.out.println("삭제 후: " + list.get(2));
 		
-		// 리스트에서 값으로 원소를 삭제: remove(Object value)
+		// 리스트에 저장된 값을 찾아서 원소를 삭제: remove(Object value)
 		list.remove("JSP");
 		System.out.println("size = " + list.size());
+		
+		// 리스트와 반복문
+		// 인덱스를 사용
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i) + ", ");
+		}
+		System.out.println();
+		
+		// 향상된 for 구문
+		for (String s : list) {
+			System.out.print(s + ", ");
+		}
+		System.out.println();
+		
+		// List<E> 클래스는 toString() 메서드를 override하고 있어서, 출력문에서 원소들을 바로 출력할 수 있음.
+		System.out.println(list);
 	}
 
 }
