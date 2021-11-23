@@ -8,4 +8,6 @@ public class Member {
 	// TODO: 생성자 - 기본 생성자, 파라미터 2개인 생성자
 	
 	// TODO: getters & setters
+	
+	// TODO: toString override
 }

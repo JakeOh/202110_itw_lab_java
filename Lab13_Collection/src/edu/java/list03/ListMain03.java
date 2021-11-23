@@ -1,5 +1,6 @@
 package edu.java.list03;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ListMain03 {
@@ -16,11 +17,12 @@ public class ListMain03 {
 		// 리스트의 내용을 출력 - 각각의 회원의 아이디와 비밀번호가 출력될 수 있도록
 		
 		// 인덱스 0 위치의 회원 정보 중에서 비밀번호를 변경하고 리스트 내용 출력
+		// (1) 인덱스 0 위치의 회원 정보를 찾음. (2) 그 회원의 비번을 설정(setter).
 		
-		// 인덱스 1 위치의 회원 정보를 삭제하고 리스트 내용을 출력
+		// 인덱스 1 위치의 회원 정보를 삭제하고 리스트 내용을 출력 - list.remove(int index)
 		
-		// 아이디가 일치하면 같은 회원으로 간주되도록 Member 클래스를 수정
-		// 아이디가 일치하는 회원을 리스트에서 삭제하고 리스트 내용을 출력
+		// 아이디가 일치하면 같은 회원(Member)으로 간주되도록 Member 클래스를 수정 - equals, hashCode
+		// 아이디가 일치하는 회원을 리스트에서 삭제하고 리스트 내용을 출력 - list.remove(Object value)
 		
 	}
 
