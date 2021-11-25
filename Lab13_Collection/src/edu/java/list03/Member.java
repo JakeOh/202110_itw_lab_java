@@ -31,4 +31,5 @@ public class Member {
 	public String toString() {
 		return "Member{memberId:" + this.memberId + ", memberPassword:" + this.memberPassword +"}";
 	}
+	
 }
