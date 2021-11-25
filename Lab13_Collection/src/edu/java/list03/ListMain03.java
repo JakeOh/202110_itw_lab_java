@@ -58,9 +58,24 @@ public class ListMain03 {
 		System.out.println(list);
 		
 		// 인덱스 1 위치의 회원 정보를 삭제하고 리스트 내용을 출력 - list.remove(int index)
+		list.remove(1);
+		System.out.println(list);
 		
 		// 아이디가 일치하면 같은 회원(Member)으로 간주되도록 Member 클래스를 수정 - equals, hashCode
 		// 아이디가 일치하는 회원을 리스트에서 삭제하고 리스트 내용을 출력 - list.remove(Object value)
+		Member member = new Member("ccc", "333"); // 삭제하려고 하는 회원 정보
+		/*
+		for (int i = 0; i < list.size(); i++) { // 인덱스 0부터 마지막 원소까지 반복하면서
+			Member m = list.get(i); // 인덱스 위치에 있는 원소를 가져옴.
+			if (m.getMemberId().equals(member.getMemberId())) {
+				// 리스트에 저장된 회원 아이디와 삭제하려고 하는 회원 아이디가 같다면 
+				list.remove(i); // 리스트에서 그 인덱스의 원소를 삭제.
+				break; // 반복문 종료
+			}
+		}
+		*/
+		list.remove(member);
+		System.out.println(list);
 		
 	}
 
