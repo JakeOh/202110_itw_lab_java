@@ -5,9 +5,30 @@ public class Member {
 	private String memberId;
 	private String memberPassword;
 	
-	// TODO: 생성자 - 기본 생성자, 파라미터 2개인 생성자
+	// 생성자(constructor) - 기본 생성자, 파라미터 2개인 생성자
+	public Member() {}
+	public Member(String memberId, String memberPassword) {
+		this.memberId = memberId;
+		this.memberPassword = memberPassword;
+	}
 	
-	// TODO: getters & setters
+	// getters(필드가 가지고 있는 값을 리턴) & setters(필드의 값을 변경)
+	public String getMemberId() {
+		return this.memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getMemberPassword() {
+		return this.memberPassword;
+	}
+	public void setMemberPassword(String memberPassword) {
+		this.memberPassword = memberPassword;
+	}
 	
-	// TODO: toString override
+	// toString override
+	@Override
+	public String toString() {
+		return "Member{memberId:" + this.memberId + ", memberPassword:" + this.memberPassword +"}";
+	}
 }

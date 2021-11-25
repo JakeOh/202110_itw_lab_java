@@ -1,5 +1,6 @@
 package edu.java.list03;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,7 +9,22 @@ public class ListMain03 {
 	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
+		// 기본 생성자(default constructor)를 사용해서 Member 클래스의 인스턴스를 생성
+		Member m1 = new Member();
+		System.out.println("m1:" + m1); // toString() 메서드를 override하기 전/후의 결과 비교
+		// getter: 멤버 변수(필드)의 값을 가져옴(읽어옴).
+		System.out.println("m1.memberId:" + m1.getMemberId());
+		System.out.println("m1.memberPassword:" + m1.getMemberPassword());
+		// setter: 멤버 변수(필드)의 값을 설정.
+		m1.setMemberPassword("abcd");
+		System.out.println("m1.memberPassword:" + m1.getMemberPassword());
+		
+		// 파라미터를 갖는 생성자를 사용해서 Member 클래스의 인스턴스를 생성
+		Member m2 = new Member("guest", "guest1234");
+		System.out.println("m2:" + m2);
+		
 		// Member 타입을 저장할 수 있는 ArrayList를 생성
+		List<Member> list = new ArrayList<>(); // 생성자를 호출할 때는 ArrayList가 저장하는 타입을 생략할 수 있음.
 		
 		// 반복문을 사용해서 
 		// 아이디와 비밀번호를 입력받아서 Member 객체를 생성해서
