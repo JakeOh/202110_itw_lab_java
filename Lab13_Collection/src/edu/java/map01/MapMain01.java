@@ -2,6 +2,7 @@ package edu.java.map01;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /*
  * Collection<E>
@@ -35,6 +36,7 @@ public class MapMain01 {
 
 	public static void main(String[] args) {
 		// Key(정수)-Value(문자열) 타입의 HashMap을 생성
+		// 생성자를 호출할 때는 key와 value의 타입을 생략해도 됨.
 		Map<Integer, String> students = new HashMap<>();
 		
 		// map에 저장된 원소의 개수: size()
@@ -43,10 +45,40 @@ public class MapMain01 {
 		// map에 새로운 데이터 추가(저장): put(key, value)
 		students.put(1, "홍길동");
 		System.out.println(students);
+		System.out.println("size = " + students.size());
 		
 		students.put(10, "오쌤");
 		System.out.println(students);
-
+		System.out.println("size = " + students.size());
+		
+		// map에 저장된 데이터 삭제: remove(key) - 해당 key의 데이터를 삭제.
+		// map은 value를 찾아서 삭제하는 기능은 없음. (비교) 리스트
+		students.remove(1);
+		System.out.println(students);
+		students.remove(2); // 매핑되어 있는 키가 없는 경우 remove 메서드는 null을 리턴. 에러가 발생하지 않음.
+		System.out.println(students);
+		
+		// map에 저장된 데이터 검색: get(key) - 해당 키의 value를 리턴.
+		System.out.println(students.get(10)); // 키가 Map에 존재하면 키에 매핑된 값(value)를 리턴.
+		System.out.println(students.get(2)); // 매핑되어 있는 키가 없는 경우 get 메서드는 null을 리턴.
+		
+		// map에서 특정 key의 값(value)을 수정하는 기능: put(key, value)
+		// put(key, value) 메서드는 key가 Map에 존재하지 않으면 새로운 key-value 쌍으로 구성된 아이템을 추가하고,
+		// key가 Map에 존재하는 경우에는 그 key에 매핑된 값(value)을 변경한다.
+		students.put(10, "아무개");
+		System.out.println(students);
+		
+		students.put(100, "abc");
+		students.put(1, "hello");
+		// keySet(): Map이 가지고 있는 key들의 집합(set)을 리턴하는 메서드
+		Set<Integer> kset = students.keySet();
+		System.out.println(kset);
+		
+		// Map 객체는 향상된 for 구문을 사용할 수 없지만,
+		// keySet을 이용하면 향상된 for 구문을 사용할 수 있음.
+		for (Integer k : kset) {
+			System.out.println("key=" + k + ", value=" + students.get(k));
+		}
 	}
 
 }
