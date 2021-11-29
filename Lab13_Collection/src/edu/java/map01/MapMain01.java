@@ -3,6 +3,7 @@ package edu.java.map01;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 /*
  * Collection<E>
@@ -79,6 +80,21 @@ public class MapMain01 {
 		for (Integer k : kset) {
 			System.out.println("key=" + k + ", value=" + students.get(k));
 		}
+		
+		// HashMap과 TreeMap 비교
+		TreeMap<Integer, String> map = new TreeMap<>();
+		map.put(10, "abc");
+		map.put(100, "def");
+		map.put(1, "aaa");
+		
+		Set<Integer> kset2 = map.keySet();
+		System.out.println(kset2); // TreeMap인 경우 keySet 메서드는 오름차순 정렬된 key들의 집합을 리턴.
+		
+		// TreeMap에는 HashMap이 가지고 있지 않은 descendingKeySet() 메서드가 있음.
+		// 내림차순 정렬된 key들의 집합을 리턴해줌.
+		Set<Integer> kset3 = map.descendingKeySet();
+		System.out.println(kset3);
+		
 	}
 
 }
