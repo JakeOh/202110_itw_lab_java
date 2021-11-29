@@ -1,4 +1,4 @@
-package edu.java.file01;
+ package edu.java.file01;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,19 +31,26 @@ public class FileMain01 {
 		FileOutputStream out = null; // 파일 쓰기를 위한 통로
 		
 		try {
-			// data 폴더에 있는 test.txt 파일을 읽기 위한 통로 객체를 생성
+			// data 폴더에 있는 test.txt 파일을 읽기 위한 통로(Stream) 객체를 생성
 			in = new FileInputStream("data/test.txt");
-			int read = in.read(); // FIS에서 1바이트를 읽음.
-			System.out.println((char)read);
+			// data 폴더의 test_copy.txt 파일에 쓰기 위한 통로(Stream) 객체를 생성
+			out = new FileOutputStream("data/test_copy.txt");
 			
-			read = in.read();
-			System.out.println((char)read);
+			while (true) { // 무한 루프
+				int read = in.read(); // FIS에서 1바이트를 읽음.
+				if (read == -1) { // 파일의 끝에 도달하면
+					break; // 무한 루프 종료
+				}
+				out.write(read); // 파일에서 읽은 1바이트(read) 값을 다른 파일에 씀.
+			}
+			System.out.println("파일 복사 성공");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				in.close(); // InputStream 객체를 닫음.
+				in.close(); // FileInputStream 객체를 닫음.
+				out.close(); // FileOutputStream 객체를 닫음.
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
