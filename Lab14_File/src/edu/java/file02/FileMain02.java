@@ -26,7 +26,7 @@ public class FileMain02 {
 				}
 //				System.out.println(result + "바이트 읽음.");
 				out.write(buffer);  // 파일에 20바이트씩 쓰기(write)
-				// 읽은 바이트만큼 쓰기
+				// -> 읽은 바이트만큼 쓰기
 			}
 			System.out.println("파일 복사 성공!");
 			
