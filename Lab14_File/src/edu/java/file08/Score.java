@@ -1,6 +1,8 @@
 package edu.java.file08;
 
-public class Score {
+import java.io.Serializable;
+
+public class Score implements Serializable {
 	// field
 	private int korean;
 	private int english;
