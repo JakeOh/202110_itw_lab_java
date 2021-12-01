@@ -1,5 +1,6 @@
 package edu.java.file10;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,9 +31,10 @@ public class FileMain10 {
 		System.out.println("-----");
 		// UTF-8로 작성된 텍스트 파일을 InputStreamReader를 사용해서 읽기.
 		try (FileInputStream in = new FileInputStream(UTF8_FILE);
-				InputStreamReader reader = new InputStreamReader(in, "UTF-8")) {
+				InputStreamReader reader = new InputStreamReader(in, "UTF-8");
+				BufferedReader br = new BufferedReader(reader);) {
 			while (true) {
-				int r = reader.read();
+				int r = br.read(); // reader.read();
 				if (r == -1) {
 					break;
 				}
