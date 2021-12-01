@@ -1,5 +1,9 @@
 package edu.java.file09;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /*
  * I/O Stream: 바이트 스트림(byte stream) - 입력/출력의 기본 단위가 byte 단위. 모든 파일 형식(txt, mp4, ...)에서 사용 가능.
  * InputStream, OutputStream
@@ -26,8 +30,49 @@ package edu.java.file09;
 
 public class FileMain09 {
 
-	public static void main(String[] args) {
-		
-	}
+	private static final String ANSI_FILE = "data/ansi.txt";
+	private static final String UTF8_FILE = "data/utf8.txt";
 	
-}
+	public static void main(String[] args) {
+		// 한글 MS-Windows 환경에서 ANSI 방식으로 저장된 텍스트 파일을 FileReader로 읽는 경우
+		FileReader reader = null;
+		try {
+			reader = new FileReader(ANSI_FILE);
+			while (true) {
+				int character = reader.read();
+				if (character == -1) { // 파일끝(EOF)
+					break;
+				}
+				System.out.println(character + " : " + (char)character);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("-----");
+		// 한글 MS-Windows에서 UTF-8로 작성된 텍스트 파일을 읽는 경우
+		try (FileReader reader2 = new FileReader(UTF8_FILE);) {
+			while (true) {
+				int r = reader2.read();
+				if (r == -1) {
+					break;
+				}
+				System.out.println(r + " : " + (char)r);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// 위의 두 가지 결과 비교: 실행 환경에 따라서 같은 내용의 파일이 다르게 읽힘.
+		
+	} // end main()
+	
+} // end class
