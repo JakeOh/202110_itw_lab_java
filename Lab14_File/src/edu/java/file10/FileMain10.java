@@ -29,6 +29,19 @@ public class FileMain10 {
 
 		System.out.println("-----");
 		// UTF-8로 작성된 텍스트 파일을 InputStreamReader를 사용해서 읽기.
+		try (FileInputStream in = new FileInputStream(UTF8_FILE);
+				InputStreamReader reader = new InputStreamReader(in, "UTF-8")) {
+			while (true) {
+				int r = reader.read();
+				if (r == -1) {
+					break;
+				}
+				System.out.println(r + " : " + (char)r);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
