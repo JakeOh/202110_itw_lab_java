@@ -1,6 +1,14 @@
 package edu.java.contact.fileutil;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +28,20 @@ public class ContactFileUtil {
 	 * @return 데이터 폴더를 관리하는 File 객체
 	 */
 	public static File initializeDataDir() {
-		// TODO
-		return null;
+		File dataDir = new File(DATA_DIR); // 상대 경로를 사용해서 File 객체 생성
+		
+		if (!dataDir.exists()) { // 데이터 폴더가 만들어져 있지 않으면
+			boolean result = dataDir.mkdir(); // 폴더 만듦.
+			if (result) {
+				System.out.println("데이터 폴더 생성 성공");
+			} else {
+				System.out.println("데이터 폴더 생성 실패");
+			}
+		} else {
+			System.out.println("이미 데이터 폴더가 만들어져 있습니다...");
+		}
+		
+		return dataDir;
 	}
 
 	/**
@@ -32,8 +52,29 @@ public class ContactFileUtil {
 	 * @return 파일에서 읽은 데이터. ArrayList<Contact> 타입 객체.
 	 */
 	public static List<Contact> readDataFromFile(File file) {
-		// TODO
-		return null;
+		List<Contact> list = null; // 리턴할 리스트
+		
+		FileInputStream in = null;
+		BufferedInputStream bin = null;
+		ObjectInputStream oin = null;
+		try {
+			in = new FileInputStream(file);
+			bin = new BufferedInputStream(in);
+			oin = new ObjectInputStream(bin);
+			
+			list = (ArrayList<Contact>) oin.readObject();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				oin.close(); // OIS을 close -> BIS이 close됨 -> FIS도 close됨.
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
 	}
 	
 	/**
@@ -43,7 +84,15 @@ public class ContactFileUtil {
 	 * @param file 데이터 파일을 관리하는 File 객체.
 	 */
 	public static void writeDataToFile(List<Contact> data, File file) {
-		// TODO
+		try (FileOutputStream out = new FileOutputStream(file);
+				BufferedOutputStream bout = new BufferedOutputStream(out);
+				ObjectOutputStream oout = new ObjectOutputStream(bout);) {
+			
+			oout.writeObject(data);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

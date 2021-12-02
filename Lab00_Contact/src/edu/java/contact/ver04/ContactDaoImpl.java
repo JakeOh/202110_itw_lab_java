@@ -4,15 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.java.contact.fileutil.ContactFileUtil;
+//import edu.java.contact.fileutil.ContactFileUtil;
 import edu.java.contact.model.Contact;
 
-import static edu.java.contact.fileutil.ContactFileUtil.*;
+import static edu.java.contact.fileutil.ContactFileUtil.*; // 모든 static 멤버(변수, 메서드)를 import
 
 public class ContactDaoImpl implements ContactDao {
 	// field(멤버 변수)
 	private List<Contact> contacts; // 연락처 정보를 저장할 리스트.
-	private File dataFile;
+	private File dataFile; // 연락처 정보 리스트를 저장할 파일.
+	private File dataDir; // 연락처 데이터 파일을 가지고 있는 폴더.
 	
 	// singleton
 	private static ContactDaoImpl instance = null;
@@ -21,10 +22,10 @@ public class ContactDaoImpl implements ContactDao {
 		dataFile = new File(DATA_DIR, DATA_FILE);
 		
 		// 현재 작업 디렉토리(CWD)에 (data 폴더가 없으면) data 폴더를 생성.
-		ContactFileUtil.initializeDataDir();
+		dataDir = initializeDataDir();
 		
 		// data 폴더에 있는 contacts.dat 파일을 읽어서 필드 contacts를 초기화.
-		contacts = ContactFileUtil.initializeData();
+		contacts = initializeData();
 	}
 	public static ContactDaoImpl getInstance() {
 		if (instance == null) {
@@ -51,7 +52,7 @@ public class ContactDaoImpl implements ContactDao {
 	@Override
 	public int insert(Contact c) {
 		contacts.add(c); // ArrayList가 변경됨
-		// TODO: 파일에 변경된 ArrayList를 씀(write).
+		writeDataToFile(contacts, dataFile); // 파일에 변경된 ArrayList를 씀(write).
 		
 		return 1;
 	}
@@ -65,7 +66,7 @@ public class ContactDaoImpl implements ContactDao {
 			contacts.get(index).setPhone(contact.getPhone());
 			contacts.get(index).setEmail(contact.getEmail());
 			
-			// TODO: 파일에 변경된 ArrayList를 씀(write).
+			writeDataToFile(contacts, dataFile); // 파일에 변경된 ArrayList를 씀(write).
 			
 			result = 1;
 		}
@@ -79,7 +80,7 @@ public class ContactDaoImpl implements ContactDao {
 		if (index >= 0 && index < contacts.size()) {
 			contacts.remove(index);
 			
-			// TODO: 파일에 변경된 ArrayList를 씀(write).
+			writeDataToFile(contacts, dataFile); // 파일에 변경된 ArrayList를 씀(write).
 			
 			result = 1;
 		}
