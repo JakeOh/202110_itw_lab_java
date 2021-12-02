@@ -1,19 +1,30 @@
 package edu.java.contact.ver04;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.java.contact.fileutil.ContactFileUtil;
 import edu.java.contact.model.Contact;
+
+import static edu.java.contact.fileutil.ContactFileUtil.*;
 
 public class ContactDaoImpl implements ContactDao {
 	// field(멤버 변수)
 	private List<Contact> contacts; // 연락처 정보를 저장할 리스트.
+	private File dataFile;
 	
 	// singleton
 	private static ContactDaoImpl instance = null;
 	private ContactDaoImpl() {
-		// TODO: 현재 작업 디렉토리(CWD)에 (data 폴더가 없으면) data 폴더를 생성.
-		// TODO: data 폴더에 있는 contacts.dat 파일을 읽어서 필드 contacts를 초기화.
+		// 연락처 정보 리스트를 저장하는 파일 관리 객체 생성.
+		dataFile = new File(DATA_DIR, DATA_FILE);
+		
+		// 현재 작업 디렉토리(CWD)에 (data 폴더가 없으면) data 폴더를 생성.
+		ContactFileUtil.initializeDataDir();
+		
+		// data 폴더에 있는 contacts.dat 파일을 읽어서 필드 contacts를 초기화.
+		contacts = ContactFileUtil.initializeData();
 	}
 	public static ContactDaoImpl getInstance() {
 		if (instance == null) {

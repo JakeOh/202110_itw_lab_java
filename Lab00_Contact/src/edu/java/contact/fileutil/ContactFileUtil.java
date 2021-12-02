@@ -1,6 +1,7 @@
 package edu.java.contact.fileutil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.java.contact.model.Contact;
@@ -44,4 +45,28 @@ public class ContactFileUtil {
 	public static void writeDataToFile(List<Contact> data, File file) {
 		// TODO
 	}
+	
+	/**
+	 * 연락처 데이터를 저장하고 있는 파일(data\contacts.dat)이 있는 지 없는 지 체크해서,
+	 * 데이터 파일이 있으면 파일에서 ArrayList를 읽어서 리턴하고,
+	 * 데이터 파일이 없으면 빈(empty) 리스트(ArrayList)를 생성해서 리턴.
+	 * 
+	 * @return Contact 객체를 저장하는 ArrayList.
+	 */
+	public static List<Contact> initializeData() {
+		List<Contact> list  = null; // 리턴할 리스트
+		
+		// 데이터 파일(data\contacts.dat)을 관리하는 File 객체를 생성.
+		File file = new File(DATA_DIR, DATA_FILE);
+		if (file.exists()) { // 데이터 파일이 만들어져 있으면
+			System.out.println("데이터 로딩중...");
+			list = readDataFromFile(file);
+		} else { // 데이터 파일이 없으면
+			System.out.println("새 데이터 생성중...");
+			list = new ArrayList<Contact>();
+		}
+		
+		return list;
+	}
+	
 }
