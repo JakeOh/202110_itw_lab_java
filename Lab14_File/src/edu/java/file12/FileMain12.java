@@ -42,13 +42,53 @@ public class FileMain12 {
 		System.out.println("경로: " + f1.getPath());
 		// 파일 객체를 생성할 때 상대 경로를 사용해서 생성한 경우에는, getPath 메서드는 상대 경로를 리턴함.
 		System.out.println("파일 이름: " + f1.getName());
+		System.out.println("존재 여부: " + f1.exists());
+		System.out.println("디렉토리 여부: " + f1.isDirectory());
+		System.out.println("파일 여부: " + f1.isFile());
+		System.out.println("파일 크기: " + f1.length());
 
 		System.out.println();
-		File f2 = new File("C:" + File.separator + "study" + File.separator + "test.txt"); // 절대 경로로 생성 
+		File f2 = new File("C:" + File.separator + "study" + File.separator + "abc.txt"); // 절대 경로로 생성 
 		System.out.println("file: " + f2);
 		System.out.println("절대 경로: " + f2.getAbsolutePath());
 		System.out.println("경로: " + f2.getPath());
 		// 파일 객체를 생성할 때 절대 경로를 사용해서 생성한 경우에는, getPath 메서드는 절대 경로를 리턴함.
+		System.out.println("존재 여부: " + f2.exists());
+		
+		System.out.println();
+		// 폴더 아래의 파일과 폴더 정보 출력
+		String parent = System.getProperty("user.dir"); // 상위 디렉토리
+		String child = "data"; // 하위 디렉토리
+		File dir = new File(parent, child); // 파일 객체 생성
+		System.out.println(dir);
+		File[] files = dir.listFiles(); // 폴더(디렉토리) 안에 있는 File 객체들의 배열을 리턴.
+		for (File f : files) {
+//			System.out.println(f);
+			String fname = f.getName();
+			if (f.isFile()) {
+				fname += "\t" + f.length() + " bytes";
+			} else {
+				fname += "\t <DIR>"; 
+			}
+			System.out.println(fname);
+		}
+		
+		System.out.println();
+		// 디렉토리(폴더) 생성과 삭제
+		File newFolder = new File("data", "test123");
+		if (!newFolder.exists()) { // 디렉토리가 존재하지 않으면
+			newFolder.mkdir(); // make directory
+			System.out.println("디렉토리 생성 성공");
+		} else {
+			System.out.println("디렉토리가 이미 존재합니다.");
+		}
+		
+		if (newFolder.exists()) { // 디렉토리가 존재하면
+			newFolder.delete();
+			System.out.println("삭제 성공");
+		} else {
+			System.out.println("디렉토리가 존재하지 않습니다.");
+		}
 		
 	}
 
