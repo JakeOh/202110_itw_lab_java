@@ -27,4 +27,29 @@ public class EnclosingCls {
 		System.out.println("클래스 변수 = " + classVar);
 	}
 
+	// static (멤버) 내부 클래스 - 중첩 클래스(Nested class)
+	// - 외부 클래스의 생성자 호출 전(인스턴스 생성 전)에도 생성자를 호출할 수 있는 내부 클래스.
+	// - 외부 클래스의 인스턴스와 무관한 클래스.
+	// - 외부 클래스의 static 멤버들만 접근이 가능함! static이 아닌 멤버들은 사용할 수 없음!
+	public static class NestedCls {
+		// 멤버 변수(필드)
+		private String value;
+		
+		// 생성자
+		public NestedCls(String value) {
+			this.value = value;
+		}
+		
+		// 메서드
+		public void nestedClassMethod() {
+			System.out.println("value = " + this.value); // 자기 자신 클래스의 멤버들은 당연히 사용 가능.
+//			System.out.println(instanceVar);
+			// -> 중첩 클래스 안에서는 바깥 클래스의 non-static 멤버를 사용할 수 없다!
+			System.out.println("outer static member: " + classVar);
+			// -> 중첩 클래스 안에서는 바깥 클래스의 static 멤버를 사용할 수 있다.
+			
+		}
+		
+	} // end class NestedCls
+	
 } // end class EnclosingCls
