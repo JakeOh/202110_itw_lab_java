@@ -1,0 +1,20 @@
+package edu.java.inner03;
+
+public class InnerMain03 {
+
+	public static void main(String[] args) {
+		// EclosingCls의 생성자 호출 전(인스턴스 생성 전)
+		// static 변수와 메서드 사용 가능. 클래스 이름으로 참조해서 사용.
+		System.out.println(EnclosingCls.classVar);
+		EnclosingCls.staticMethod();
+		
+		// EnclsingCls의 생성자 호출(인스턴스 생성)
+		// 인스턴스 변수와 메서드는 참조 변수(인스턴스의 주소를 저장하는 변수)를 통해서 사용.
+		EnclosingCls outer = new EnclosingCls(111);
+		outer.printMembers();
+		outer.staticMethod(); // 나쁜 사용 예
+		// -> static 변수나 메서드는 참조 변수로 참조해서 사용이 가능하긴 하지만 권장하지 않음.
+
+	}
+	
+}
