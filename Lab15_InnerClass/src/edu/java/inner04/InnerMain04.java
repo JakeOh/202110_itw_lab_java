@@ -12,7 +12,6 @@ public class InnerMain04 {
 		FinishListener finish = new FinishListener(); // 버튼을 클릭했을 때 할 일 정의.
 		// 종료 버튼의 listener를 설정
 		btnFinish.setOnClickListener(finish); // 버튼이 할 일을 버튼에 설정.
-		
 		// 생성된 종료 버튼 클릭
 		btnFinish.click(); // 버튼을 클릭.
 		
