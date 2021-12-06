@@ -41,12 +41,12 @@ public class AppMain01 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("Hello, Swing!");
-		lblNewLabel.setFont(new Font("D2Coding", Font.BOLD, 32));
-		frame.getContentPane().add(lblNewLabel, BorderLayout.CENTER);
+		JLabel lblHello = new JLabel("Hello, Swing!");
+		lblHello.setFont(new Font("D2Coding", Font.BOLD, 32));
+		frame.getContentPane().add(lblHello, BorderLayout.CENTER);
 	}
 
 }
