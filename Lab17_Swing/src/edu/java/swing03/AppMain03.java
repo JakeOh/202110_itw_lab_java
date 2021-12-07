@@ -26,6 +26,7 @@ public class AppMain03 {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override // 쓰레드가 시작될 때 Java Runtime에 의해서 자동으로 호출되는 메서드
 			public void run() {
 				try {
 					AppMain03 window = new AppMain03();
@@ -109,7 +110,7 @@ public class AppMain03 {
 					textResult.setText(resultMessage);
 					
 				} catch (NumberFormatException ex) {
-					System.out.println("Number1 또는 Number2는 숫자로 입력하세요!");
+					textResult.setText("Number1 또는 Number2는 숫자로 입력하세요!");
 				}
 			}
 		});
@@ -118,11 +119,25 @@ public class AppMain03 {
 		frame.getContentPane().add(btnMinus);
 		
 		btnMultiply = new JButton("x");
+		btnMultiply.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 파라미터 ActionEvent e: 이벤트가 발생시킨 객체에 대한 정보를 가지고 있는 클래스.
+				// actionPerformed 메서드에 전달된 argument e를 메서드에 전달.
+				performCalculation(e);
+			}
+		});
 		btnMultiply.setFont(new Font("D2Coding", Font.BOLD, 32));
 		btnMultiply.setBounds(356, 158, 160, 64);
 		frame.getContentPane().add(btnMultiply);
 		
 		btnDivide = new JButton("/");
+		btnDivide.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				performCalculation(e);
+			}
+		});
 		btnDivide.setFont(new Font("D2Coding", Font.BOLD, 32));
 		btnDivide.setBounds(528, 158, 160, 64);
 		frame.getContentPane().add(btnDivide);
@@ -132,6 +147,31 @@ public class AppMain03 {
 		textResult.setBounds(12, 232, 676, 64);
 		frame.getContentPane().add(textResult);
 		textResult.setColumns(10);
-	}
+	} // end initialize()
 
-}
+	// 바깥 클래스(outer class, enclosing class)에서 정의한 메서드는 inner class에서도 사용 가능!
+	private void performCalculation(ActionEvent e) {
+		try {
+			// JTextField에 있는 문자열을 읽어서 숫자로 변환
+			double x = Double.parseDouble(textNumber1.getText());
+			double y = Double.parseDouble(textNumber2.getText());
+			
+			// 이벤트가 발생한 버튼에 따라서 서로 다른 계산을 수행하고 결과를 문자열로 작성
+			Object source = e.getSource();
+			String resultMessage = "";
+			if (source == btnMultiply) {
+				resultMessage = x + " x " + y + " = " + (x * y);
+			} else if (source == btnDivide) {
+				resultMessage = x + " / " + y + " = " + (x / y);
+			}
+			
+			// 결과 메시지를 JTextField에 출력
+			textResult.setText(resultMessage);
+			
+		} catch (NumberFormatException ex) {
+			textResult.setText("Number 1 또는 Number 2는 숫자로 입력해야 합니다.");
+		}
+		
+	}
+	
+} // end class AppMain03
