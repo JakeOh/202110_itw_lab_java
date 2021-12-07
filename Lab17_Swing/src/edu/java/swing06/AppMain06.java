@@ -11,6 +11,8 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AppMain06 {
 
@@ -18,6 +20,7 @@ public class AppMain06 {
 	private JTextField textName;
 	private JTextField textPhone;
 	private JTextField textEmail;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -94,13 +97,45 @@ public class AppMain06 {
 		frame.getContentPane().add(textEmail);
 		
 		JButton btnConfirm = new JButton("입력 완료");
+		btnConfirm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showInfo();
+			}
+		});
 		btnConfirm.setFont(new Font("D2Coding", Font.PLAIN, 32));
 		btnConfirm.setBounds(12, 232, 240, 64);
 		frame.getContentPane().add(btnConfirm);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		textArea.setBounds(12, 306, 520, 204);
 		frame.getContentPane().add(textArea);
+	} // end initialize()
+
+	private void showInfo() {
+		// 3개의 JTextField에서 이름, 전화번호, 이메일을 읽음.
+		String name = textName.getText();
+		String phone = textPhone.getText();
+		String email = textEmail.getText();
+		
+//		String message = "이름: " + name + "\n"
+//				+ "전화번호: " + phone + "\n"
+//				+ "이메일: " + email;
+		StringBuffer message = new StringBuffer(); // StringBuffer 객체 생성
+		message.append("이름: ").append(name).append("\n")
+			.append("전화번호: ").append(phone).append("\n")
+			.append("이메일: ").append(email);
+		
+		textArea.setText(message.toString());
+		
+		// 3개의 JTextField의 내용을 모두 지움.
+		clearAllTextField();
+	}
+
+	private void clearAllTextField() {
+		textName.setText("");
+		textPhone.setText("");
+		textEmail.setText("");
 	}
 }
