@@ -127,6 +127,28 @@ public class AppMain08 {
 		btnInputDlg.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		btnInputDlg.setBounds(12, 196, 300, 52);
 		frame.getContentPane().add(btnInputDlg);
+		
+		JButton btnCustomDlg = new JButton("Custom Dialog");
+		btnCustomDlg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MyDialog.showMyDialog();
+			}
+		});
+		btnCustomDlg.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		btnCustomDlg.setBounds(12, 258, 300, 52);
+		frame.getContentPane().add(btnCustomDlg);
+		
+		JButton btnCustomFrame = new JButton("Custom Frame");
+		btnCustomFrame.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MyFrame.showMyFrame();
+			}
+		});
+		btnCustomFrame.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		btnCustomFrame.setBounds(12, 320, 300, 52);
+		frame.getContentPane().add(btnCustomFrame);
 	}
 
 }
