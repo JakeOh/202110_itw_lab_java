@@ -118,7 +118,7 @@ public class AppMain06 {
 		String name = textName.getText();
 		String phone = textPhone.getText();
 		String email = textEmail.getText();
-		
+
 //		String message = "이름: " + name + "\n"
 //				+ "전화번호: " + phone + "\n"
 //				+ "이메일: " + email;
