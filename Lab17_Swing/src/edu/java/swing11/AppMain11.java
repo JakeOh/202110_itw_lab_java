@@ -12,6 +12,7 @@ public class AppMain11 {
 
 	private JFrame frame;
 	private JTable table;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -47,17 +48,22 @@ public class AppMain11 {
 		JScrollPane scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"1", "\uD578\uB4DC\uD3F0", "100000", "\uC804\uC790\uC81C\uD488", "10"},
-				{"2", "\uBCFC\uD39C", "1000", "\uC7A1\uD654", "100"},
-				{"3", "\uCD08\uCF5C\uB9BF", "2000", "\uC2DD\uB8CC\uD488", "20"},
-			},
-			new String[] {
-				"\uC0C1\uD488 \uBC88\uD638", "\uC0C1\uD488 \uC774\uB984", "\uC0C1\uD488 \uAC00\uACA9", "\uCE74\uD14C\uACE0\uB9AC", "\uC7AC\uACE0 \uC218\uB7C9"
-			}
-		));
+		table = new JTable(); // JTable 객체 생성
+		
+		// JTable의 컬럼 이름
+		String[] colNames = {"상품 번호", "상품 이름", "상품 가격", "카테고리", "재고 수량"};
+		// JTable의 데이터
+		Object[][] data = {
+				{1, "핸드폰", 100_000, "전자제품", 10},
+				{2, "볼펜", 1_000, "문구", 100},
+				{3, "초콜릿", 2_000, "식료품", 50},
+		};
+		// 데이터와 컬럼 이름을 가지고 DefaultTableModel 객체를 생성
+		model = new DefaultTableModel(data, colNames);
+		// DefaultTableModel 객체를 JTable에 설정.
+		table.setModel(model);
+		
+		// 완성된 테이블을 JScrollPane의 Viewport에 설정.
 		scrollPane.setViewportView(table);
 	}
 
