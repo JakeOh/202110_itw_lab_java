@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 
 public class AppMain09 {
@@ -166,6 +169,12 @@ public class AppMain09 {
 		frame.getContentPane().add(comboBox);
 		
 		btnConfirm = new JButton("확인");
+		btnConfirm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showInfo();
+			}
+		});
 		btnConfirm.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		btnConfirm.setBounds(8, 240, 148, 49);
 		frame.getContentPane().add(btnConfirm);
@@ -174,6 +183,48 @@ public class AppMain09 {
 		textArea.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		textArea.setBounds(8, 326, 604, 191);
 		frame.getContentPane().add(textArea);
+	}
+
+	private void showInfo() {
+		StringBuffer buffer = new StringBuffer();
+
+		Enumeration<AbstractButton> elements = buttonGroup.getElements();
+		for (; elements.hasMoreElements(); ) {
+			AbstractButton btn = elements.nextElement();
+			if (btn.isSelected()) {
+				btn.getText();
+			}
+		}
+		
+		// 라디오버튼들 중에서 선택된 상태
+		if (rbPrivate.isSelected()) {
+			buffer.append(rbPrivate.getText());
+		} else if (rbPackage.isSelected()) {
+			buffer.append(rbPackage.getText());
+		} else if (rbProtected.isSelected()) {
+			buffer.append(rbProtected.getText());
+		} else if (rbPublic.isSelected()) {
+			buffer.append(rbPublic.getText());
+		}
+		buffer.append(" 라디오버튼 선택.\n");
+		
+		// 체크박스 선택 상태
+		if (cbAbstract.isSelected()) {
+			buffer.append(cbAbstract.getText()).append(" 체크박스 선택.\n");
+		}
+		if (cbStatic.isSelected()) {
+			buffer.append(cbStatic.getText()).append(" 체크박스 선택.\n");
+		}
+		if (cbFinal.isSelected()) {
+			buffer.append(cbFinal.getText()).append(" 체크박스 선택.\n");
+		}
+		
+		// 콤보 박스 선택 상태
+		String item = (String) comboBox.getSelectedItem();
+		buffer.append(item).append(" 콤보박스 아이템 선택.");
+		
+		
+		textArea.setText(buffer.toString());
 	}
 
 	private void showCheckBoxStatus(ActionEvent e) {
