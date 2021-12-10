@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 import edu.java.contact.model.Contact;
 import edu.java.contact.ver04.ContactDao;
 import edu.java.contact.ver04.ContactDaoImpl;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ContactMain05 {
 	
@@ -68,6 +70,12 @@ public class ContactMain05 {
 		frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
 		
 		JButton btnInsert = new JButton("추가");
+		btnInsert.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ContactInsertFrame.showFrame(frame);
+			}
+		});
 		btnInsert.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		buttonPanel.add(btnInsert);
 		
