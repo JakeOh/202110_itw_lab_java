@@ -4,12 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AppMain12 {
 	
@@ -95,11 +101,23 @@ public class AppMain12 {
 		frame.getContentPane().add(textMath);
 		
 		btnInput = new JButton("점수 입력");
+		btnInput.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				inputScore();
+			}
+		});
 		btnInput.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		btnInput.setBounds(12, 227, 148, 62);
 		frame.getContentPane().add(btnInput);
 		
 		btnDelete = new JButton("행 삭제");
+		btnDelete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteRowFromTable();
+			}
+		});
 		btnDelete.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		btnDelete.setBounds(172, 227, 148, 62);
 		frame.getContentPane().add(btnDelete);
@@ -109,9 +127,111 @@ public class AppMain12 {
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		
 		// 테이블에 테이블 모델을 설정
 		tableModel = new DefaultTableModel(null, COLUMN_NAMES);
+		
+		// 테이블 모델에서 변화가 생겼을 때(예: 셀의 내용이 변경) 이벤트를 처리하기 위한 이벤트 핸들러를 테이블 모델에 등록.
+		tableModel.addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+//				System.out.println("type: " + e.getType()); // 테이블 모델 변화의 이벤트 타입(추가, 삭제, 수정)
+//				System.out.println("first row: " + e.getFirstRow()); // 이벤트가 발생한 행(row) 인덱스
+//				System.out.println("column: " + e.getColumn()); // 이벤트가 발생한 열(column) 인덱스
+				handleTableChange(e);
+			}
+		});
+		
 		table.setModel(tableModel);
+		
 		scrollPane.setViewportView(table);
 	}
+
+	private void handleTableChange(TableModelEvent e) {
+		// 테이블 모델 변화 이벤트의 타입을 찾음.
+		int eventType = e.getType();
+		if (eventType != TableModelEvent.UPDATE) {
+			// UPDATE 이벤트만 처리하고, 그 이외의 다른 이벤트(INSERT, DELETE)들은 처리하지 않음.
+			return;
+		}
+		
+		int row = e.getFirstRow(); // (업데이트) 이벤트가 발생한 행 인덱스
+		int col = e.getColumn(); // (업데이트) 이벤트가 발생한 열 인덱스
+		if (col >= 0 && col <= 2) { // 국어, 영어, 수학 점수 변경이 일어났을 때
+			// 총점과 평균을 다시 계산하기 위해서 국어, 영어, 수학 점수를 테이블에서 읽음.
+			int kor = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0)));
+			int eng = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 1)));
+			int math = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 2)));
+			
+			Score s = new Score(kor, eng, math);
+			
+			// 변경된 점수로 계산된 총점과 평균을 테이블 모델에 반영
+			tableModel.setValueAt(s.total(), row, 3);
+			tableModel.setValueAt(s.average(), row, 4);
+			
+			String msg = row + "번 인덱스 행의 정보가 수정됐습니다.";
+			JOptionPane.showMessageDialog(frame, msg);
+		}
+		
+	}
+
+	private void deleteRowFromTable() {
+		// 테이블에서 선택된 행(row)의 인덱스를 찾음
+		int index = table.getSelectedRow();
+		if (index == -1) { // 테이블에서 선택된 행이 없으면
+			JOptionPane.showMessageDialog(frame, "테이블에서 삭제할 행을 먼저 선택하세요.");
+			return;
+		}
+		
+		// 삭제할 것인 지 확인
+		int confirm = JOptionPane.showConfirmDialog(frame, "정말 삭제할까요?", "삭제 확인", JOptionPane.YES_NO_OPTION);
+		// 사용자가 Yes를 선택했을 때만 행을 삭제
+		if (confirm == JOptionPane.YES_OPTION) {
+			tableModel.removeRow(index);
+		}
+	}
+
+	private void inputScore() {
+		// 국어, 영어, 수학 점수를 읽음(문자열 -> 정수 변환).
+		int korean = 0;
+		int english = 0;
+		int math = 0;
+		
+		try {
+			korean = Integer.parseInt(textKorean.getText());
+			english = Integer.parseInt(textEnglish.getText());
+			math = Integer.parseInt(textMath.getText());
+			
+		} catch (NumberFormatException e) {
+			String message = e.getMessage() + "\n입력한 내용은 정수가 아닙니다.";
+			JOptionPane.showMessageDialog(frame, message, "입력 오류", JOptionPane.ERROR_MESSAGE);
+			return; // 메서드 종료
+			
+		} finally {
+			// 모든 텍스트 필드의 값들을 지움
+			clearAllTextFields();
+		}
+		
+		// Score 객체 생성 -> 총점, 평균 기능 사용 가능
+		Score score = new Score(korean, english, math);
+		
+		// 테이블의 행에 추가할 데이터를 1차원 배열로 생성
+		Object[] rowData = {
+				score.getKorean(),
+				score.getEnglish(),
+				score.getMath(),
+				score.total(),
+				score.average()
+		};
+		// 테이블 모델에 행(row)를 추가
+		tableModel.addRow(rowData);
+		
+	}
+	
+	private void clearAllTextFields() {
+		textKorean.setText("");
+		textEnglish.setText("");
+		textMath.setText("");
+	}
+	
 }
