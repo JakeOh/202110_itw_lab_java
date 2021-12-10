@@ -16,6 +16,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import edu.java.contact.model.Contact;
+
 public class ContactInsertFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -24,15 +26,16 @@ public class ContactInsertFrame extends JFrame {
 	private JTextField textEmail;
 	
 	private Component parentComponent; // 부모 컴포넌트 참조값을 저장하기 위한 변수
+	private ContactMain05 mainApp; // 메인 화면(ContactMain05) 객체의 참조값을 저장하기 위한 변수
 
 	/**
 	 * Launch the application.
 	 */
-	public static void showFrame(Component parentComponent) {
+	public static void showFrame(Component parentComponent, ContactMain05 mainApp) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ContactInsertFrame frame = new ContactInsertFrame(parentComponent);
+					ContactInsertFrame frame = new ContactInsertFrame(parentComponent, mainApp);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,8 +47,9 @@ public class ContactInsertFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ContactInsertFrame(Component parentComponent) {
+	public ContactInsertFrame(Component parentComponent, ContactMain05 mainApp) {
 		this.parentComponent = parentComponent;
+		this.mainApp = mainApp;
 		initialize();
 	}
 	
@@ -97,6 +101,12 @@ public class ContactInsertFrame extends JFrame {
 		contentPane.add(textEmail);
 		
 		JButton btnInsert = new JButton("추가");
+		btnInsert.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				insertContact();
+			}
+		});
 		btnInsert.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		btnInsert.setBounds(12, 205, 116, 56);
 		contentPane.add(btnInsert);
@@ -111,4 +121,19 @@ public class ContactInsertFrame extends JFrame {
 		btnCancel.setBounds(140, 205, 116, 56);
 		contentPane.add(btnCancel);
 	}
-}
+
+	private void insertContact() {
+		// JTextField에서 이름, 전화번호, 이메일을 읽음.
+		String name = textName.getText();
+		String phone = textPhone.getText();
+		String email = textEmail.getText();
+		
+		// 추가할 연락처 정보를 ContactMain 클래스의 메서드를 호출하면서 argument로 전달.
+		Contact c = new Contact(name, phone, email);
+		mainApp.insertConcat(c);
+		
+		// 창닫기
+		dispose();
+	}
+
+} // end class ContactInsertFrame

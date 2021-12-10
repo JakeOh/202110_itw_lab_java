@@ -3,6 +3,7 @@ package edu.java.contact.ver05;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -73,7 +74,7 @@ public class ContactMain05 {
 		btnInsert.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ContactInsertFrame.showFrame(frame);
+				ContactInsertFrame.showFrame(frame, ContactMain05.this);
 			}
 		});
 		btnInsert.setFont(new Font("D2Coding", Font.PLAIN, 24));
@@ -113,9 +114,22 @@ public class ContactMain05 {
 	} // end loadContactData()
 	
 	private void addContactToTableModel(Contact c) {
-		String[] rowData = {c.getName(), c.getPhone()};
+		String[] rowData = {c.getName(), c.getPhone()}; // JTable의 행(row)에 삽입될 데이터
 		model.addRow(rowData);
 		
 	} // end addContactToTableModel()
+
+	public void insertConcat(Contact c) {
+		// 파일에 쓰기 -> 팝업창
+		int result = dao.insert(c);
+		if (result == 1) {
+			// JTable 업데이트
+			addContactToTableModel(c);
+			
+			// 성공 팝업
+			JOptionPane.showMessageDialog(frame, "새 연락처가 추가됐습니다... ^^");
+		}
+		
+	} // end insertContact()
 
 } // end class ContactMain05
