@@ -1,29 +1,44 @@
 package edu.java.contact.ver05;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import edu.java.contact.model.Contact;
+import edu.java.contact.ver04.ContactDao;
+import edu.java.contact.ver04.ContactDaoImpl;
 
 public class ContactUpdateFrame extends JFrame {
 
 	private JPanel contentPane;
 	
-	private Component parentComponent;
+	private JTextField textName;
+	private JTextField textPhone;
+	private JTextField textEmail;
 
+	private Component parentComponent; // 업데이트 프레임을 보여주기 위한 부모 컴포넌트
+	private int index; // 수정할 연락처의 인덱스
+	private ContactDao dao;
+	
 	/**
 	 * Launch the application.
 	 * @param frame 
 	 */
 	// Ctrl+Shift+O: 자동 import
-	public static void showFrame(Component parentComponent) {
+	public static void showFrame(Component parentComponent, int index) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent);
+					ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent, index);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,9 +50,12 @@ public class ContactUpdateFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ContactUpdateFrame(Component parentComponent) {
+	public ContactUpdateFrame(Component parentComponent, int index) {
 		this.parentComponent = parentComponent;
+		this.index = index;
+		this.dao = ContactDaoImpl.getInstance();
 		initialize();
+		loadContactData();
 	}
 	
 	public void initialize() {
@@ -46,12 +64,70 @@ public class ContactUpdateFrame extends JFrame {
 		
 		int x = parentComponent.getX();
 		int y = parentComponent.getY();
-		setBounds(x, y, 450, 300);
+		setBounds(x, y, 450, 320);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel labelName = new JLabel("이름");
+		labelName.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		labelName.setBounds(12, 10, 116, 56);
+		contentPane.add(labelName);
+		
+		textName = new JTextField();
+		textName.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		textName.setColumns(10);
+		textName.setBounds(140, 10, 282, 56);
+		contentPane.add(textName);
+		
+		JLabel labelPhone = new JLabel("전화번호");
+		labelPhone.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		labelPhone.setBounds(12, 76, 116, 56);
+		contentPane.add(labelPhone);
+		
+		textPhone = new JTextField();
+		textPhone.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		textPhone.setColumns(10);
+		textPhone.setBounds(140, 76, 282, 56);
+		contentPane.add(textPhone);
+		
+		JLabel labelEmail = new JLabel("이메일");
+		labelEmail.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		labelEmail.setBounds(12, 139, 116, 56);
+		contentPane.add(labelEmail);
+		
+		textEmail = new JTextField();
+		textEmail.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		textEmail.setColumns(10);
+		textEmail.setBounds(140, 139, 282, 56);
+		contentPane.add(textEmail);
+		
+		JButton btnUpdate = new JButton("수정 완료");
+		btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		btnUpdate.setBounds(12, 205, 150, 56);
+		contentPane.add(btnUpdate);
+		
+		JButton btnCancel = new JButton("취소");
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 24));
+		btnCancel.setBounds(174, 205, 116, 56);
+		contentPane.add(btnCancel);
 	} // end initialize()
 
+	public void loadContactData() {
+		// dao를 사용해서 인덱스 검색을 하고, 검색된 내용을 텍스트 필드에 채워줌.
+		Contact c = dao.select(index);
+		textName.setText(c.getName());
+		textPhone.setText(c.getPhone());
+		textEmail.setText(c.getEmail());
+		
+	} // end loadContactData()
+	
 } // end class ContactUpdateFrame

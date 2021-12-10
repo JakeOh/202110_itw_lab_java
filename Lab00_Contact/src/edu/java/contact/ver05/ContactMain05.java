@@ -88,7 +88,7 @@ public class ContactMain05 {
 		btnUpdate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ContactUpdateFrame.showFrame(frame);
+				showUpdateFrame();
 			}
 		});
 		btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 24));
@@ -165,5 +165,20 @@ public class ContactMain05 {
 		}
 		
 	} // end deleteContact()
+	
+	private void showUpdateFrame() {
+		// 테이블에서 수정하기 위해 선택된 행이 있는 지 검사
+		int row = table.getSelectedRow();
+		if (row == -1) {
+			JOptionPane.showMessageDialog(frame, 
+					"수정할 행을 먼저 선택하세요.", 
+					"확인", 
+					JOptionPane.WARNING_MESSAGE);
+			return; // 메서드
+		}
+		
+		// 연락처 수정 화면을 보여줌.
+		ContactUpdateFrame.showFrame(frame, row);
+	} // end showUpdateFrame()
 	
 } // end class ContactMain05
