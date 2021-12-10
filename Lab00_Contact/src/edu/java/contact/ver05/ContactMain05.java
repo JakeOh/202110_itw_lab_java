@@ -85,10 +85,22 @@ public class ContactMain05 {
 		buttonPanel.add(btnSearch);
 		
 		JButton btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ContactUpdateFrame.showFrame(frame);
+			}
+		});
 		btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		buttonPanel.add(btnUpdate);
 		
 		JButton btnDelete = new JButton("삭제");
+		btnDelete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteContact();
+			}
+		});
 		btnDelete.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		buttonPanel.add(btnDelete);
 		
@@ -120,7 +132,7 @@ public class ContactMain05 {
 	} // end addContactToTableModel()
 
 	public void insertConcat(Contact c) {
-		// 파일에 쓰기 -> 팝업창
+		// 파일에 쓰기
 		int result = dao.insert(c);
 		if (result == 1) {
 			// JTable 업데이트
@@ -132,4 +144,26 @@ public class ContactMain05 {
 		
 	} // end insertContact()
 
+	private void deleteContact() {
+		// 테이블에서 선택된 행(row)가 있는 지 검사
+		int row = table.getSelectedRow();
+		if (row == -1) {
+			JOptionPane.showMessageDialog(
+					frame, 
+					"삭제할 행을 먼저 선택하세요...", 
+					"확인", 
+					JOptionPane.WARNING_MESSAGE);
+			return; // 메서드 종료
+		}
+		
+		int result = dao.delete(row); // ArrayList에서 연락처 정보 삭제 -> 파일에 변경된 내용 반영
+		if (result == 1) {
+			// JTable에서 행 삭제
+			model.removeRow(row);
+			// 성공 팝업
+			JOptionPane.showMessageDialog(frame, "연락처 정보가 삭제됐습니다.");
+		}
+		
+	} // end deleteContact()
+	
 } // end class ContactMain05

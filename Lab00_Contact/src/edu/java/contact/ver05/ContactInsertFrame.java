@@ -128,12 +128,12 @@ public class ContactInsertFrame extends JFrame {
 		String phone = textPhone.getText();
 		String email = textEmail.getText();
 		
+		// 창닫기
+		dispose();
+		
 		// 추가할 연락처 정보를 ContactMain 클래스의 메서드를 호출하면서 argument로 전달.
 		Contact c = new Contact(name, phone, email);
 		mainApp.insertConcat(c);
-		
-		// 창닫기
-		dispose();
 	}
 
 } // end class ContactInsertFrame
