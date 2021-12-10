@@ -178,7 +178,20 @@ public class ContactMain05 {
 		}
 		
 		// 연락처 수정 화면을 보여줌.
-		ContactUpdateFrame.showFrame(frame, row);
+		ContactUpdateFrame.showFrame(frame, row, this);
 	} // end showUpdateFrame()
+	
+	public void contactUpdateNotify(int row, Contact c) {
+		// 업데이트된 행과 연락처 정보를 테이블 모델에 반영
+		model.setValueAt(c.getName(), row, 0);
+		model.setValueAt(c.getPhone(), row, 1);
+	} // end contactUpdateNotify()
+	
+	public void contactUpdateNotify() {
+		// 테이블 모델을 초기화 - 전체 데이터를 새로 로딩
+		model = new DefaultTableModel(null, COLUMN_NAMES_SHORT); // 데이터를 모두 삭제
+		table.setModel(model); // 테이블에 초기화된 테이블 모델을 세팅.
+		loadContactData(); // 전체 데이터 새로 로딩
+	}
 	
 } // end class ContactMain05

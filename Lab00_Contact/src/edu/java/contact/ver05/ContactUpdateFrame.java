@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -28,17 +29,18 @@ public class ContactUpdateFrame extends JFrame {
 	private Component parentComponent; // 업데이트 프레임을 보여주기 위한 부모 컴포넌트
 	private int index; // 수정할 연락처의 인덱스
 	private ContactDao dao;
+	private ContactMain05 mainApp;
 	
 	/**
 	 * Launch the application.
 	 * @param frame 
 	 */
 	// Ctrl+Shift+O: 자동 import
-	public static void showFrame(Component parentComponent, int index) {
+	public static void showFrame(Component parentComponent, int index, ContactMain05 mainApp) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent, index);
+					ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent, index, mainApp);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,10 +52,11 @@ public class ContactUpdateFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ContactUpdateFrame(Component parentComponent, int index) {
+	public ContactUpdateFrame(Component parentComponent, int index, ContactMain05 mainApp) {
 		this.parentComponent = parentComponent;
 		this.index = index;
 		this.dao = ContactDaoImpl.getInstance();
+		this.mainApp = mainApp;
 		initialize();
 		loadContactData();
 	}
@@ -105,6 +108,12 @@ public class ContactUpdateFrame extends JFrame {
 		contentPane.add(textEmail);
 		
 		JButton btnUpdate = new JButton("수정 완료");
+		btnUpdate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updateContact();
+			}
+		});
 		btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 24));
 		btnUpdate.setBounds(12, 205, 150, 56);
 		contentPane.add(btnUpdate);
@@ -129,5 +138,29 @@ public class ContactUpdateFrame extends JFrame {
 		textEmail.setText(c.getEmail());
 		
 	} // end loadContactData()
+	
+	private void updateContact() {
+		// 업데이트할 내용을 읽음.
+		String name = textName.getText();
+		String phone = textPhone.getText();
+		String email = textEmail.getText();
+		Contact c = new Contact(name, phone, email);
+		
+		// dao를 사용해서 연락처 정보를 수정.
+		int result = dao.update(index, c);
+		if (result == 1) {
+			// 업데이트 창 닫기
+			dispose();
+			
+			// 메인 화면에게 연락처 정보가 수정됐다고 알려줌.
+//			mainApp.contactUpdateNotify(index, c);
+			mainApp.contactUpdateNotify();
+			
+			// 성공 팝업은 메인 창 위에 띄우기
+			JOptionPane.showMessageDialog(parentComponent, "연락처 정보가 수정됐습니다.");
+
+		}
+		
+	} // end updateContact()
 	
 } // end class ContactUpdateFrame
