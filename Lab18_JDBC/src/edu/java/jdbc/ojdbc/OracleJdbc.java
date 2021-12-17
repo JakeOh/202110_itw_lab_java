@@ -1,7 +1,7 @@
 package edu.java.jdbc.ojdbc;
 
 public interface OracleJdbc {
-	// Oracle DB 접속 주소/접속 방식
+	// Oracle DB 접속 주소(포트, SID)/접속 방식
 	String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	// Oracle DB 접속 사용자 이름
 	String USER = "scott";

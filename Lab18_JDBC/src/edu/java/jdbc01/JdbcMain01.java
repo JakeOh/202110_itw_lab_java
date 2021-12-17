@@ -34,11 +34,13 @@ public class JdbcMain01 {
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("DB 연결 성공");
 			
+			// 5. 
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				conn.close();
+				conn.close(); // DB connection 해제
 				System.out.println("DB 연결 끊기 성공");
 			} catch (SQLException e) {
 				e.printStackTrace();
