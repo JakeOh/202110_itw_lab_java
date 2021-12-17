@@ -28,7 +28,10 @@ public class JdbcMain02 {
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			
 			// 실행할 insert SQL 문장 템플릿 - ? 부분은 콘솔에서 입력한 내용으로 채워야 함.
-			String sql = "insert into blogs (title, content) values (?, ?)";
+//			String sql = "insert into blogs (title, content) values (?, ?)";
+			String sql = "insert into " + TABLE_BLOGS  
+					+ " (" + COL_TITLE + ", " + COL_CONTENT + ")"
+					+ " values (?, ?)";
 			
 			// SQL 문장을 실행시킬 수 있는 Statement 객체 생성
 			// 완성된 SQL 문장을 사용할 때: createStatement() 메서드 사용 -> Statement 객체 생성
@@ -63,8 +66,6 @@ public class JdbcMain02 {
 			}
 		}
 		
-		
-
 	}
 
 }
